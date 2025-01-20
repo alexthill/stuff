@@ -1,0 +1,48 @@
+services:
+  rust:
+    build:
+      context: docker-rust
+    restart: always
+    ports:
+      - "8003:8000"
+    volumes:
+      - rust_src:/src
+      - rust_goinfre:/root
+    networks:
+      - rust
+  postgres:
+    image: "postgres:17-bullseye"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=not_so_secret_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - rust
+
+volumes:
+  rust_src:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind 
+      device: $HOME/Documents/rust
+  rust_goinfre:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind 
+      device: $HOME/goinfre/rust_root
+  pgdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind 
+      device: $HOME/.var/pgdata
+
+networks:
+    rust:
+        name: rust
