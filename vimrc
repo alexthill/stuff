@@ -38,6 +38,9 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*.d,*.o
 
+" syntax highlighting for glsl
+au BufNewFile,BufRead *.comp,*.frag,*.tese,*.tesc,*.geom,*.vert,*.glsl setf glsl
+
 " enable permanent highlight on seach
 set hlsearch
 
