@@ -36,7 +36,7 @@ set wildmenu
 set wildmode=list:longest
 " There are certain files that we would never want to edit with Vim.
 " Wildmenu will ignore files with these extensions.
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*.d,*.o
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.webp,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*.d,*.o,*.a
 
 " syntax highlighting for glsl
 au BufNewFile,BufRead *.comp,*.frag,*.tese,*.tesc,*.geom,*.vert,*.glsl setf glsl
@@ -51,7 +51,11 @@ set rtp^="/goinfre/athill/opam/default/share/ocp-indent/vim"
 command Spaces :%s/	/    /g | :noh
 command Tabs :%s/    /	/g | :noh
 
+" Use Ctrl-C to copy selection to system clipboard
 vnoremap <C-c> :w !xclip -i -sel c <CR><CR>
+
+" Remember postion of last opened file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`." | endif
 
 "C++ Class Generator
 function! Class(ClassName)
