@@ -44,9 +44,14 @@ au BufNewFile,BufRead *.comp,*.frag,*.tese,*.tesc,*.geom,*.vert,*.glsl setf glsl
 " enable permanent highlight on seach
 set hlsearch
 
+" ocaml formatting
+set rtp^="/goinfre/athill/opam/default/share/ocp-indent/vim"
+
 " convert tabs to 4 spaces and vice versa
 command Spaces :%s/	/    /g | :noh
 command Tabs :%s/    /	/g | :noh
+
+vnoremap <C-c> :w !xclip -i -sel c <CR><CR>
 
 "C++ Class Generator
 function! Class(ClassName)
@@ -67,9 +72,9 @@ function! Class(ClassName)
     call append(11,"};")
     call append(12,"")
     call append(13,"#endif")
-	normal dd
-	normal gg
-	normal j
+    normal dd
+    normal gg
+    normal j
     :execute 'write' header
    	"================== editing source file ========================
     let src = "".a:ClassName.".cpp"
@@ -94,9 +99,9 @@ function! Class(ClassName)
     call append(17,a:ClassName."::~".a:ClassName."() {")
     call append(18,"	// dtor")
     call append(19,"}")
-	normal dd
-	normal gg
+    normal dd
+    normal gg
     :execute 'write' src
-	normal gT
+    normal gT
 endfunction
 command! -nargs=1 Class call Class(<f-args>)
