@@ -1,6 +1,9 @@
 set cindent
+
+" Show trailing spaces and tabs in gray.
 set list
 set listchars=trail:.,tab:>-
+highlight SpecialKey ctermfg=Gray guifg=Gray
 
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
